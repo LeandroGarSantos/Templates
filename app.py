@@ -1,15 +1,22 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from datetime import datetime
 
 app = Flask(__name__)
+
+users = {
+    'Alice': {'age': 25, 'country': 'USA'},
+    'Bob': {'age': 30, 'country': 'UK'},
+    'Charlie': {'age': 35, 'country': 'Australia'}
+} 
 
 @app.route('/')
 def index():
     title = "My Page"
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    return render_template('index.html', title=title, name='Alice', current_time=current_time)
+    # name = request.args.get('name')  # Extract the 'name' parameter from the query string
+    return render_template('index.html', title=title, users=users, current_time=current_time)
 
-@app.route('/from')
+@app.route('/form')
 def form():
   return render_template('form.html')
 
