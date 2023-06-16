@@ -4,9 +4,9 @@ from datetime import datetime
 app = Flask(__name__)
 
 users = {
-    'Alice': {'age': 25, 'country': 'USA'},
-    'Bob': {'age': 30, 'country': 'UK'},
-    'Charlie': {'age': 35, 'country': 'Australia'}
+    'Alice': {'age': 25, 'country': 'USA', 'language': 'English'},
+    'Bob': {'age': 30, 'country': 'BR', 'language': 'Portuguese'},
+    'Charlie': {'age': 35, 'country': 'Japan', 'language': 'Japanese'}
 } 
 
 @app.route('/')
@@ -23,6 +23,7 @@ def form():
 @app.route('/all-users')
 def all_users():
     return render_template('all_users.html', users=users)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
