@@ -9,6 +9,7 @@ users = {
     'Charlie': {'age': 35, 'country': 'JP', 'language': 'Japanese'}
 } 
 
+
 @app.route('/')
 def index():
     title = "My Page"
@@ -19,21 +20,25 @@ def index():
 
 @app.route('/form')
 def form():
-  return render_template('form.html')
+    return render_template('form.html')
+
 
 @app.route('/all-users')
 def all_users():
     return render_template('all_users.html', users=users)
+
 
 @app.route('/greet/<name>')
 def greet(name):
     name = request.args.get('name', 'Guest')  # Use 'Guest' as default value if no 'name' parameter is provided
     return render_template('greet.html', title='Home', name=name)
 
+
 @app.route('/square/<int:number>')
 def square(number):
     square_value= number * number
     return f"The square of {number} is {square_value}."
+
 
 @app.route('/update-country',methods=['GET', 'POST'])
 def update_country():
@@ -47,10 +52,12 @@ def update_country():
         return redirect('/all-users')
     else:
         return render_template ('update_country.html')
-    
-    @app.errorhandler(404)
+
+
+@app.errorhandler(404)
 def page_not_found(error):
     return render_template('404.html'), 404
+
 
 @app.errorhandler(500)
 def internal_server_error(error):
