@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from datetime import datetime
 
 app = Flask(__name__)
@@ -34,6 +34,17 @@ def greet(name):
 def square(number):
     square_value= number * number
     return f"The square of {number} is {square_value}."
+
+@app.route('/update-country',methods=['GET', 'POST'])
+def update_country():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        country = request.form.get('country')
+        if name in users:
+            users[name]['country'] = country
+        return redirect('/all-users')
+    else:
+        return render_template ('update_country.html')
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
