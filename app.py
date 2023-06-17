@@ -40,11 +40,14 @@ def update_country():
     if request.method == 'POST':
         name = request.form.get('name')
         country = request.form.get('country')
+        language = request.form.get('language')
         if name in users:
             users[name]['country'] = country
+            users[name]['language'] = language
         return redirect('/all-users')
     else:
         return render_template ('update_country.html')
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
